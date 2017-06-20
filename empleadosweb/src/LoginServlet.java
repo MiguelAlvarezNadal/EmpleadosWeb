@@ -1,6 +1,9 @@
 
 
 import java.io.IOException;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -56,7 +59,17 @@ public class LoginServlet extends HttpServlet {
 			HttpSession sesion = request.getSession();
 			sesion.setAttribute("nombre", usuario);
 			sesion.setAttribute("id", pwd);
-			request.getRequestDispatcher("resultado.jsp").forward(request, response);
+			
+			//Actualizar el mapa del contexto, introduciendo la nueva sesion y el nombre.
+			ServletContext sc = request.getServletContext();
+			Map<String, String> mapa_nombre_sesion = (Map<String, String>)sc.getAttribute("mapa_nombre_sesion");
+			String clave_sesion = sesion.getId();
+			mapa_nombre_sesion.put(clave_sesion, usuario);
+	    	log.debug("Mapa de sesiones actualizado");
+	    	
+	    	//request.getRequestDispatcher("resultado.jsp").forward(request, response);
+	    	request.getRequestDispatcher("resultado.jsp").include(request, response);
+	    	request.getRequestDispatcher("mostrar_sesiones.jsp").include(request, response);
 		}
 		else{
 			//El usuario no existe, y le mando a una pagina de error.

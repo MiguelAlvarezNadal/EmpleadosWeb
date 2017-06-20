@@ -1,5 +1,8 @@
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -46,6 +49,10 @@ public class EscuchaInicioYFinContexto implements ServletContextListener {
     	int numsesiones = 0;
     	//Meto el contador al saco del contexto
     	sc.setAttribute("sesionesactivas", numsesiones);
+    	//Creo el mapa para las sesiones
+    	Map<String, String> mapa_nombres_sesion = new HashMap<String, String>();
+    	sc.setAttribute("mapa_nombre_sesion", mapa_nombres_sesion);
+    	log.debug("Mapa de sesiones vacío en el contexto");
     }
 	
 }

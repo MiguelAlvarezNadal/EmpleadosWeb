@@ -1,5 +1,7 @@
 
 
+import java.util.Map;
+
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
@@ -56,6 +58,11 @@ public class EscuchaInicioYFinSesion implements HttpSessionListener {
     	sesionesactivas = sesionesactivas - 1;
     	sc.setAttribute("sesionesactivas", sesionesactivas);
     	log.debug("Sesiones activas = " + sesionesactivas);
+    	//Eliminar sesion:
+    	//TODO Actualizo el mapa de sesiones y elimino la que acaba de destruirse.
+    	Map<String, String> mapa_nombre_sesion = (Map<String, String>)sc.getAttribute("mapa_nombre_sesion");
+    	mapa_nombre_sesion.remove(id_sesion);
+    	log.debug("Sesion destruida del mapa de sesiones");
     }
 	
 }

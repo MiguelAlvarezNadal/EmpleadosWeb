@@ -16,9 +16,8 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class FiltroPerfil
  */
 @WebFilter("/ConsultarMiInfo")
-//@WebFilter(servletNames = {"/ConsultarMiInfo", "miperfil.jsp", "resultado.jsp"})
 /**
- * @WebFilter(ServletNames = {"servlet1", "Servlet2", "servlet3"})
+ * @WebFilter(ServletNames = {"ConsultarMiInfo", "Servlet2", "servlet3"})
  * 
  * */
 public class FiltroPerfil implements Filter {
